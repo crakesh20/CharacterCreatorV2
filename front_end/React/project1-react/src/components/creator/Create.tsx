@@ -24,12 +24,12 @@ function Create() {
     let checking = () => {
 
     //       Check to see if the values are properly updating (they are)
-          console.log("Name: " + characterName);
-          console.log("Age: " + characterAge);
-          console.log("Desc: " + characterDescription);
-          console.log("Setting: " + characterSetting);
-          console.log("Private? " + characterPrivate);
-          console.log("Mature? " + characterMatureOrNot);
+        //   console.log("Name: " + characterName);
+        //   console.log("Age: " + characterAge);
+        //   console.log("Desc: " + characterDescription);
+        //   console.log("Setting: " + characterSetting);
+        //   console.log("Private? " + characterPrivate);
+        //   console.log("Mature? " + characterMatureOrNot);
 
         // Check if all required fields are there
           if (!characterName) {

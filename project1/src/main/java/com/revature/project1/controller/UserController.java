@@ -149,11 +149,11 @@ public class UserController {
     }
 
     //Delete
-    // TESTED 
     @DeleteMapping("{userId}")
     public void removeUserHandler(@PathVariable int userId) {
         userService.removeUser(userId);
     }
 
     // Logout
+
 }
