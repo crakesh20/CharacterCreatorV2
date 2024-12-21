@@ -46,22 +46,22 @@ function Create() {
               return
           }
 
-        // axios.post("http://localhost:8080/characters/create",
-        //     {
-        //         characterName,
-        //         characterAge, 
-        //         characterSetting, 
-        //         characterDescription, 
-        //         characterPrivate, 
-        //         characterMatureOrNot
-        //     },
-        //     {withCredentials: true}
-        // ).then((res) => {
-        //     console.log(res.data)
-        //     console.log("Character created")
-        // }).catch((err) => {
-        //     console.log(err)
-        // })
+        axios.post("http://localhost:8080/characters/create",
+            {
+                "characterName": characterName,
+                "characterAge": characterAge, 
+                "characterSetting": characterSetting, 
+                "description": characterDescription, 
+                "public": characterPrivate, 
+                "matureContent": characterMatureOrNot
+            },
+            {withCredentials: true}
+        ).then((res) => {
+            console.log(res.data)
+            console.log("Character created")
+        }).catch((err) => {
+            console.log(err)
+        })
 
     }
 
