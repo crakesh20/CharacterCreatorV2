@@ -9,6 +9,7 @@ import Create from "./components/creator/Create";
 import Search from "./components/search/Search";
 import Profile from "./components/profile/Profile";
 import { createContext, useEffect, useState } from "react";
+import Character from "./components/character/Character";
 
 //This context will store the username and role of someone who is logged in
 export interface AuthContextType{
@@ -64,6 +65,7 @@ function App() {
           <Route path="/home" element={<Home></Home>}></Route>
           <Route path="/create" element={<Create></Create>}></Route>
           <Route path="/search" element={<Search></Search>}></Route>
+          <Route path="/search/character" element={<Character></Character>}></Route>
           <Route path="/profile" element={<Profile></Profile>}></Route>
         </Routes>
       </BrowserRouter>

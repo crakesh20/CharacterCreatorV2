@@ -20,7 +20,7 @@ function Nav() {
         <Link to="/create">Create</Link>
         <Link to="/search">Search</Link>
         <Link to="/profile">Profile</Link>
-        <button onClick={handleLogout}>Log Out</button>
+        <button onClick={handleLogout} className="logoutButton">Log Out</button>
     </div>
   )
 }
