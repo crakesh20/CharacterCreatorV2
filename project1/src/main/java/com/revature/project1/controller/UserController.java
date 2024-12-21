@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("users")
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"}, allowCredentials = "true")
 public class UserController {
     private final UserService userService;
 
@@ -58,6 +58,13 @@ public class UserController {
             return retrievedUser;
         }
         return null;
+    }
+
+    // TODO: Get the users whose has that specific user id
+    @GetMapping("search/userId/{inputId}")
+    public User getSpecificUsers(@PathVariable("inputId") int inputId, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        return userService.getUserById(inputId, username);
     }
 
     // READ
