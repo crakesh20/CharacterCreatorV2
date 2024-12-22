@@ -1,4 +1,8 @@
 .profile_info {
+<<<<<<< HEAD
+    /* display: inline-block;  */
+    padding-left: 10px;
+=======
     font-size: 20;
     margin-left: 10px;
 }
@@ -9,6 +13,7 @@
 
 hr {
     border-color: black;
+>>>>>>> ce5180c7b119614c6f2e5bf2a8dc3f195ce82926
 }
 
 .char {
@@ -25,7 +30,8 @@ hr {
     padding-right: 1%;
     /* FROM DEMOS */
     border-radius: 10px;
-    /* text-align: center; */
-    width: 250px;
+    /* align-items: center; */
+    text-align: center;
+    width: 275px;
     margin: 20px;
 }
