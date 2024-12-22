@@ -73,8 +73,8 @@ public class UserService
 
     // TODO: add a check to ensure only an admin can ban users
     //Ban or Unban a User
-    public User moderateUser(User updatedUser){
-        Optional<User> thisUser = userDAO.findById(updatedUser.getUserId());
+    public User moderateUser(int userId){
+        Optional<User> thisUser = userDAO.findById(userId);
         // if(thisUser.isPresent()) {
         //     thisUser.get().setBanned(updatedUser.isBanned());
         //     return userDAO.save(thisUser.get());
@@ -82,8 +82,9 @@ public class UserService
         if (thisUser.isPresent()) {
             User user = thisUser.get();
             if (user.getAccType() == User.AccountType.ADMIN) {
-                user.setBanned(updatedUser.isBanned());
-                return userDAO.save(thisUser.get());
+                //Toggle banned state
+                user.setBanned(!user.isBanned());
+                return userDAO.save(user);
             }
         }
         return null;

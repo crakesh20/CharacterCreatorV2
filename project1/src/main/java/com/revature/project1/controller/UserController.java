@@ -138,9 +138,9 @@ public class UserController {
     }
 
     //Ban or unban a user
-    @PatchMapping("my-profile/moderate")
-    public ResponseEntity<User> moderateUserHandler(@RequestBody User thisUser) {
-        User updatedUser = userService.moderateUser(thisUser);
+    @PatchMapping("/moderate/{userId}")
+    public ResponseEntity<User> moderateUserHandler(@PathVariable int userId) {
+        User updatedUser = userService.moderateUser(userId);
         // Checks if the user exists
         if (updatedUser == null) {
             return ResponseEntity.badRequest().build();
