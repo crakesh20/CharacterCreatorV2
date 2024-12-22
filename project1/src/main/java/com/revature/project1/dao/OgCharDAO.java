@@ -20,4 +20,18 @@ public interface OgCharDAO extends JpaRepository<OgChar, Integer>
 
     @Query("SELECT c FROM OgChar c WHERE c.characterName LIKE %:inputString%")
     List<OgChar> getSpecificCharactersAll(@Param("inputString") String inputString);
+
+    List<OgChar> findAllByCreator(int id);
+
+    @Query("SELECT c FROM OgChar c WHERE c.creator = :creatorId AND c.isPublic = true AND c.matureContent = false")
+    List<OgChar> getSpecificCharactersByIdPublicNotMature(@Param("creatorId") int creatorId);
+
+    @Query("SELECT c FROM OgChar c WHERE c.creator = :creatorId AND c.isPublic = true")
+    List<OgChar> getSpecificCharactersByIdPublic(@Param("creatorId") int creatorId);
+
+//    // FIX LATER: own characters cannot see public characters even if they made them
+//    // BUT they can just see all their characters on their profile so idk
+//    @Query("SELECT c FROM OgChar c WHERE c.creator = :userId")
+//    List<OgChar> getOwnCharacters(@Param("creatorId") int userId);
+
 }

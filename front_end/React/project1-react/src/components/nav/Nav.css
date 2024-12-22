@@ -23,3 +23,23 @@
     background-color: darkslategrey;
     color: lightgray;
 }
+
+.logoutButton {
+    float: right;
+    padding: 20px;
+    font-size: 20px;
+    background-color: darkslategrey;
+    color: lightgray;
+    overflow: hidden;
+    border-width: 0px;
+    margin-right: 10px;
+
+}
+
+.logoutButton a {
+    float: right;
+    color: lightgray;
+    text-decoration: none;
+    padding: 20px;
+    font-size: 20px;
+}

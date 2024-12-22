@@ -43,6 +43,7 @@ function Login() {
               {username, password}, {withCredentials:true})
               .then((res) => {
                 console.log(res.data)
+                auth?.setUserId(res.data.userId)
                 auth?.setUsername(res.data.username)
                 auth?.setRole(res.data.accType)
               }) 

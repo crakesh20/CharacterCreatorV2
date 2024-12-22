@@ -60,11 +60,18 @@ public class UserController {
         return null;
     }
 
-    // TODO: Get the users whose has that specific user id
+    // : Get the users whose has that specific user id
     @GetMapping("search/userId/{inputId}")
     public User getSpecificUsers(@PathVariable("inputId") int inputId, HttpSession session) {
         String username = (String) session.getAttribute("username");
         return userService.getUserById(inputId, username);
+    }
+
+    // : Get the characters whose has that specific user id
+    @GetMapping("search/userId/character/{userId}")
+    public List<OgChar> getSpecificCharacters(@PathVariable("userId") int userId, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        return userService.getCharactersById(userId, username);
     }
 
     // READ
@@ -73,7 +80,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    // TODO: Get the users whose username contains a specific string
+    // : Get the users whose username contains a specific string
     @GetMapping("search/user/{inputString}")
     public List<User> getSpecificUsers(@PathVariable("inputString") String input, HttpSession session) {
         String username = (String) session.getAttribute("username");
@@ -84,7 +91,7 @@ public class UserController {
         return userService.getSpecificUsersAll(input);
     }
 
-    // TODO: Get the characters whose name contains a specific string
+    // : Get the characters whose name contains a specific string
     @GetMapping("search/character/{inputString}")
     public List<OgChar> getSpecificChars(@PathVariable("inputString") String input, HttpSession session) {
         String username = (String) session.getAttribute("username");
@@ -142,9 +149,11 @@ public class UserController {
     }
 
     //Delete
-    // TESTED 
     @DeleteMapping("{userId}")
     public void removeUserHandler(@PathVariable int userId) {
         userService.removeUser(userId);
     }
+
+    // Logout
+
 }

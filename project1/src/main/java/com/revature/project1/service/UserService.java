@@ -139,5 +139,19 @@ public class UserService
         return null;
     }
 
+    public List<OgChar> getCharactersById(int userId, String username) {
+        // Check if user is an Admin or not
+        User user = getUserByUsername(username);
+        if (user.getAccType() == User.AccountType.USER) {
+            // Can only see public characters
+            if (user.isMatureContentVisible()) {
+                return ogCharDAO.getSpecificCharactersByIdPublic(userId);
+            }
+            return ogCharDAO.getSpecificCharactersByIdPublicNotMature(userId);
+        }
+        // Can see all characters (public and private)
+        return ogCharDAO.findAllByCreator(userId);
+    }
+
 
 }

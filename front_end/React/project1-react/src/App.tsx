@@ -8,7 +8,8 @@ import Login from "./components/login/Login";
 import Create from "./components/creator/Create";
 import Search from "./components/search/Search";
 import Profile from "./components/profile/Profile";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import Character from "./components/character/Character";
 
 //This context will store the username and role of someone who is logged in
 export interface AuthContextType{
@@ -17,7 +18,8 @@ export interface AuthContextType{
   username: string,
   setUsername: (username: string) => void,
   role: "unauthenticated" | "USER" | "ADMIN",
-  setRole: (role: "unauthenticated" | "USER" | "ADMIN") => void
+  setRole: (role: "unauthenticated" | "USER" | "ADMIN") => void,
+  logout: () => void
 }
 
 export const authContext = createContext<AuthContextType | null>(null);
@@ -26,6 +28,20 @@ function App() {
   const [userId, setUserId] = useState<number>(0)
   const [username, setUsername] = useState<string>('')
   const [role, setRole] = useState<"unauthenticated" | "USER" | "ADMIN">("unauthenticated")
+
+  const logout = () => {
+    setUserId(0)
+    setUsername("")
+    setRole("unauthenticated")
+  }
+
+  useEffect(() => {
+    if (userId === 0 && username === "" && role === "unauthenticated") {
+      console.log("User logged out:")
+    } else {
+      console.log("User is logged in:")
+    }
+  }, [userId, username, role]);
 
   return (
     <>
@@ -37,7 +53,8 @@ function App() {
         username,
         setUsername,
         role,
-        setRole
+        setRole,
+        logout,
       }
     }>
       <BrowserRouter>
@@ -48,6 +65,7 @@ function App() {
           <Route path="/home" element={<Home></Home>}></Route>
           <Route path="/create" element={<Create></Create>}></Route>
           <Route path="/search" element={<Search></Search>}></Route>
+          <Route path="/search/character" element={<Character></Character>}></Route>
           <Route path="/profile" element={<Profile></Profile>}></Route>
         </Routes>
       </BrowserRouter>
