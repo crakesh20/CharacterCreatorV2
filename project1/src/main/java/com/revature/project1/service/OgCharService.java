@@ -15,13 +15,13 @@ import java.util.Optional;
 @Service
 public class OgCharService {
     private final OgCharDAO ogCharDAO;
-//    private final UserDAO userDAO;
+    private final UserDAO userDAO;
 
     //    public OgCharService(OgCharDAO ogCharDAO, UserDAO userDAO)
     @Autowired
     public OgCharService(OgCharDAO ogCharDAO, UserDAO userDAO) {
         this.ogCharDAO = ogCharDAO;
-//        this.userDAO = userDAO;
+        this.userDAO = userDAO;
     }
 
     //Create a New Character
@@ -57,19 +57,19 @@ public class OgCharService {
     }
 
     //Delete a Character.
-    // TODO: Make it so that only the character's creator can delete a character
+    // : Make it so that only the character's creator can delete a character
     public void deleteCharacter(int characterId, String username) {
-//        // Get the character and the user trying to delete it
-//        User retrievedUser = userDAO.getUserByUsername(username);
-//        Optional<OgChar> retrievedCharacter = ogCharDAO.findById(characterId);
-//        // Check if the character exists
-//        if (retrievedCharacter.isPresent()) {
-//            OgChar character = retrievedCharacter.get();
-//            // If the user's id is the same as the character's creator id, then delete it
-//            if (retrievedUser.getUserId() == character.getCreator()) {
-//                ogCharDAO.deleteById(characterId);
-//            }
-//        }
+        // Get the character and the user trying to delete it
+        User retrievedUser = userDAO.getUserByUsername(username);
+        Optional<OgChar> retrievedCharacter = ogCharDAO.findById(characterId);
+        // Check if the character exists
+        if (retrievedCharacter.isPresent()) {
+            OgChar character = retrievedCharacter.get();
+            // If the user's id is the same as the character's creator id, then delete it
+            if (retrievedUser.getUserId() == character.getCreator()) {
+                ogCharDAO.deleteById(characterId);
+            }
+        }
     }
 
 //    public List<User> getSpecificCharactersPublic(String input) {
