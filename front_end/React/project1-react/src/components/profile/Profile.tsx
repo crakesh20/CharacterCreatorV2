@@ -3,13 +3,11 @@ import "./Profile.css";
 import { OgChar } from "../interfaces/OgChar";
 import axios from "axios";
 import { authContext } from "../../App";
-import MiniChar from "./MiniChar";
 
 function Profile() {
   const auth = useContext(authContext);
   const [profileUsername, setProfileUsername] = useState<string>("");
   const [ownCharacters, setOwnCharacters] = useState<OgChar[]>([]);
-//   const [selectedCharacter, setSelectedCharacter] = useState<OgChar>(null);
 
   let getOwnCharacters = (ogc: OgChar[]) => {
     setOwnCharacters(ogc);
