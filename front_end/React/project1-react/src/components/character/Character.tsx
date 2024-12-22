@@ -1,10 +1,28 @@
+import { useLocation, useParams } from "react-router-dom";
 import "./Character.css";
+import { OgChar } from "../interfaces/OgChar";
+import { useEffect } from "react";
 
 function Character() {
+
+  // const [selectedCharacterId, setSelectedCharacterId] = useParams<{characterId: string}>();
+
+  // useEffect(() => {
+  //   axios
+  //     .get<OgChar[]>(
+  //       `http://localhost:8080/users/search/userId/character/${userId}`,
+  //       { withCredentials: true }
+  //     )
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       getOwnCharacters(res.data);
+  //     });
+  // }, []);
+
   return (
     <main>
       <br /> <br />
-      <h1 className="title">*Character Name*</h1>
+      <h1 className="title">*Character Name Here*</h1>
       <hr />
       <br />
       <div className="char_display">

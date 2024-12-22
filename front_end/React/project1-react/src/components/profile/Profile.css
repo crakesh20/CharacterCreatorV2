@@ -25,7 +25,8 @@ hr {
     padding-right: 1%;
     /* FROM DEMOS */
     border-radius: 10px;
-    /* text-align: center; */
-    width: 250px;
+    /* align-items: center; */
+    text-align: center;
+    width: 275px;
     margin: 20px;
 }
