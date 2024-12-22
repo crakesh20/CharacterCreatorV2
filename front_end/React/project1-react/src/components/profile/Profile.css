@@ -1,3 +1,12 @@
+.profile_info {
+    font-size: 20;
+    margin-left: 10px;
+}
+
+hr {
+    border-color: black;
+}
+
 .char {
     border: 2px CanvasText;
     display: inline-block;
