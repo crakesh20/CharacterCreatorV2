@@ -3,9 +3,9 @@ import "./Profile.css";
 import { OgChar } from "../interfaces/OgChar";
 import axios from "axios";
 import { authContext } from "../../App";
+import MiniChar from "./MiniChar";
 
 function Profile() {
-
   const auth = useContext(authContext);
   const [ownCharacters, setOwnCharacters] = useState<OgChar[]>([]);
 
@@ -24,7 +24,7 @@ function Profile() {
         console.log(res.data);
         getOwnCharacters(res.data);
       });
-  }, ownCharacters);
+  }, []);
 
   let un = auth?.username;
 
@@ -37,7 +37,9 @@ function Profile() {
 
       <div className="profile_info">
         <div>
-            <div style={{display: 'inline-block'}}><h2>Welcome, {un}!</h2></div>
+          <div style={{ display: "inline-block" }}>
+            <h2>Welcome, {un}!</h2>
+          </div>
         </div>
         {/* <h3>Date of Account Creation:</h3> */}
         {/* <h3>About Me:</h3> */}
@@ -45,55 +47,33 @@ function Profile() {
       </div>
 
       <div>
-        <table>
-            <thead>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Setting</th>
-                <th>Description</th>
-            </thead>
-            <tbody>
-            {
-                ownCharacters.map((chara) => {
-                return(
-                    <tr key={chara.characterId}>
-                        <td>{chara.characterName}</td>
-                        <td>{chara.characterAge}</td>
-                        <td>{chara.characterSetting}</td>
-                    </tr>
-                )
-                })
-            }
-            </tbody>
-        </table>
+        {/* <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Setting</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody> */}
+            {ownCharacters.map((chara) => {
+              return (
+                // <tr key={chara.characterId}>
+                //   <td>{chara.characterName}</td>
+                //   <td>{chara.characterAge}</td>
+                //   <td>{chara.characterSetting}</td>
+                // </tr>
+                <MiniChar {...chara} key={"Character-" + chara.characterId}/>
+              );
+            })}
+          {/* </tbody>
+        </table> */}
       </div>
 
       <br />
       <br />
-      <br />
 
-      {/* 
-        <div className="left_char">
-            <span className="char">
-                <b>*Character 1 Name*</b> 
-                <br /><br />
-                <b>Age:</b> 
-                <br /><br />
-                <b>Gender:</b> 
-                <br />
-                <br />
-                <b>Description:</b> 
-                <br />
-                <br />
-                <b>Setting:</b>                
-                <br />
-                <br />
-                <b>Private?</b> 
-                <br />
-                <br />
-                <b>18+?</b> <br></br>
-            </span>
-        </div> */}
     </div>
   );
 }
