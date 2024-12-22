@@ -12,8 +12,20 @@ function Search() {
 
   const [userSearchResult, setUserSearchResult] = useState<User[]>([])
   const [charSearchResult, setCharSearchResult] = useState<OgChar[]>([])
+  const [moderatedUser, setModeratedUser] = useState<number>(0)
+  const [moderationResult, setModerationResult] = useState<User>()
   const [searchType, setSearchType] = useState<string>("")
   const [searchText, setSearchText] = useState<string>("")
+
+  let moderateUser = () => {
+    console.log(`Reached the moderate method with userId: ${moderatedUser}`)
+    axios.patch<User>(`http://localhost:8080/users/moderate/${moderatedUser}`)
+    .then((res) => {
+      setModerationResult(res.data)
+      console.log(res.data)
+      //console.log(moderationResult)
+    })
+  } 
 
   let search = () => {
     console.log(searchType)
@@ -40,6 +52,9 @@ function Search() {
       })
     }
   }
+
+
+  
 
   return (
   <>
@@ -101,28 +116,49 @@ function Search() {
         searchType == "user"?
         <table>
         <thead>
-          <th>Username</th>
-          <th>Account Type</th>
+          <tr>
+            <th>Username</th>
+            <th>Account Type</th>
+          </tr>
         </thead>
         <tbody>
           {
+            auth?.role == "ADMIN" ?
             userSearchResult.map((result) => {
             return(
                   <tr key={result.userId}>
                     <td>{result.username}</td>
                     <td>{result.accType}</td>
+                    <td>
+                      <button onClick={
+                          () => {setModeratedUser(result.userId)}}>Select for Moderation</button>
+                    </td>
+                    <td>
+                      <button onClick={moderateUser}>Moderate</button>
+                    </td>
                   </tr>
               )
             })
+            :
+            userSearchResult.map((result) => {
+              return(
+                    <tr key={result.userId}>
+                      <td>{result.username}</td>
+                      <td>{result.accType}</td>
+                    </tr>
+                )
+              })
           }
           </tbody>
         </table>
         :
         <table>
         <thead>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Description</th>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Description</th>
+          </tr>
         </thead>
         <tbody>
           {
