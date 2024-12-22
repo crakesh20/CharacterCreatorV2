@@ -1,7 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
 import "./Character.css";
-import { OgChar } from "../interfaces/OgChar";
-import { useEffect } from "react";
 
 function Character() {
 
@@ -22,7 +19,7 @@ function Character() {
   return (
     <main>
       <br /> <br />
-      <h1 className="title">*Character Name Here*</h1>
+      <h1 className="title">Name</h1>
       <hr />
       <br />
       <div className="char_display">

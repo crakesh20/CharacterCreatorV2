@@ -1,27 +1,19 @@
-import { OgChar } from "../interfaces/OgChar";
 import "./Profile.css";
 
-function MiniChar(props: OgChar) {
-
-    // const navigate = useNavigate()
-
-    // const handleMore = () => {
-    //     navigate(`/character/${props.characterId}`);
-    // }
-    
+function MiniChar() {
   return (
     <div className="char">
       <span>
-        <b>{props.characterName}</b>
+        <b>Character Name</b>
         <br />
         <br />
-        <b>Age: {props.characterAge}</b>
+        <b>Age:</b>
         <br />
         <br />
-        <b>Setting: {props.characterSetting}</b>
+        <b>Setting:</b>
         <br /> 
         <br />
-        {/* <button onClick={handleMore} className="moreButton">More</button> */}
+        {/* <button onClick={More} className="moreButton">More</button> */}
       </span>
     </div>
   );

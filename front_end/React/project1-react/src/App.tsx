@@ -66,7 +66,6 @@ function App() {
           <Route path="/create" element={<Create></Create>}></Route>
           <Route path="/search" element={<Search></Search>}></Route>
           <Route path="/profile" element={<Profile></Profile>}></Route>
-          {/* <Route path="/profile/:characterId" element={<Character />} /> */}
         </Routes>
       </BrowserRouter>
 
