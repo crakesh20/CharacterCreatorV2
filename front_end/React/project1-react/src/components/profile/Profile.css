@@ -3,6 +3,10 @@
     margin-left: 10px;
 }
 
+.profile_title {
+    display: inline-block;
+}
+
 hr {
     border-color: black;
 }
