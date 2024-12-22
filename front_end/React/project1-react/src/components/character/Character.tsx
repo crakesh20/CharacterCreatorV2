@@ -1,25 +1,10 @@
 import "./Character.css";
 
 function Character() {
-
-  // const [selectedCharacterId, setSelectedCharacterId] = useParams<{characterId: string}>();
-
-  // useEffect(() => {
-  //   axios
-  //     .get<OgChar[]>(
-  //       `http://localhost:8080/users/search/userId/character/${userId}`,
-  //       { withCredentials: true }
-  //     )
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       getOwnCharacters(res.data);
-  //     });
-  // }, []);
-
   return (
     <main>
       <br /> <br />
-      <h1 className="title">Name</h1>
+      <h1 className="title">*Character Name*</h1>
       <hr />
       <br />
       <div className="char_display">

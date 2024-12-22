@@ -58,6 +58,4 @@ public class OgCharController
         String username = (String)session.getAttribute("username");
         ogCharService.deleteCharacter(characterId, username);
     }
-
-
 }
