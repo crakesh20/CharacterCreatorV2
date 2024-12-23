@@ -13,6 +13,11 @@ function MiniChar(props: OgChar) {
         navigate(`/character/${props.characterId}`, {state: props})
     };
 
+    let clickedEdit = () => {
+      setSelectedCharacterId(props.characterId)
+      navigate(`/edit/${props.characterId}`, {state: props})
+    }
+
     useEffect(() => {
         console.log("SelectedCharacterId: " + selectedCharacterId)
     })
@@ -30,6 +35,7 @@ function MiniChar(props: OgChar) {
         <br />
         <br />
         <button onClick = {clickedMore} className="moreButton">More</button>
+        <button onClick = {clickedEdit} className="editButton">Edit</button>
       </span>
     </div>
   );

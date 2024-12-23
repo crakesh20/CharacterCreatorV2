@@ -2,7 +2,7 @@
 import "./App.css";
 import Nav from "./components/nav/Nav";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./components/home/Home";
+//import Home from "./components/home/Home";
 import Footer from "./components/footer/Footer";
 import Login from "./components/login/Login";
 import Create from "./components/creator/Create";
@@ -10,6 +10,7 @@ import Search from "./components/search/Search";
 import Profile from "./components/profile/Profile";
 import { createContext, useEffect, useState } from "react";
 import Character from "./components/character/Character";
+import Edit from "./components/edit/Edit";
 
 //This context will store the username and role of someone who is logged in
 export interface AuthContextType{
@@ -62,12 +63,13 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Login></Login>}></Route>
-          <Route path="/home" element={<Home></Home>}></Route>
+          {/* <Route path="/home" element={<Home></Home>}></Route> */}
           <Route path="/create" element={<Create></Create>}></Route>
           <Route path="/search" element={<Search></Search>}></Route>
           {/* <Route path="/search/character" element={<Character></Character>}></Route> */}
           <Route path="/profile" element={<Profile></Profile>}></Route>
           <Route path="/character/:characterId" element={<Character></Character>}></Route>
+          <Route path="/edit/:characterId" element={<Edit></Edit>}></Route>
         </Routes>
       </BrowserRouter>
 
