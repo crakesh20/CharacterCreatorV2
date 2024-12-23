@@ -1,6 +1,7 @@
 import "./Create.css"
 import { SyntheticEvent, useState } from 'react';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Create() {
 
@@ -12,6 +13,8 @@ function Create() {
     const [characterSetting, setCharacterSetting] = useState<string>('')
     const [characterPublic, setCharacterPublic] = useState<boolean>(false)
     const [characterMatureOrNot, setCharacterMatureOrNot] = useState<boolean>(false)
+
+    const navigate = useNavigate();
 
     let checkChangePublic = () => {
         setCharacterPublic(!characterPublic)
@@ -63,6 +66,8 @@ function Create() {
             console.log(err)
         })
 
+        alert("Character Created!")
+        navigate("/create")
     }
 
   return (
