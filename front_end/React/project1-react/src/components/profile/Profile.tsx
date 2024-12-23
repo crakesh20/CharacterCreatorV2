@@ -4,10 +4,35 @@ import { OgChar } from "../interfaces/OgChar";
 import axios from "axios";
 import { authContext } from "../../App";
 import MiniChar from "./MiniChar";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const auth = useContext(authContext);
+  const navigate = useNavigate();
   const [ownCharacters, setOwnCharacters] = useState<OgChar[]>([]);
+
+  let deleteProfile = () => {
+    let id = auth?.userId;
+    console.log("Trying to delete profile");
+    axios
+      .delete(`http://localhost:8080/users/${id}`, {
+        withCredentials: true,
+      })
+      .then(() => {
+        console.log("Profile Deleted");
+        auth?.setUserId(0)
+        auth?.setUsername("")
+        auth?.setRole("unauthenticated")
+        setOwnCharacters([])
+        alert("Profile Deleted!")
+        navigate("/")
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+
+
+  };
 
   let getOwnCharacters = (ogc: OgChar[]) => {
     setOwnCharacters(ogc);
@@ -57,23 +82,37 @@ function Profile() {
             </tr>
           </thead>
           <tbody> */}
-            {ownCharacters.map((chara) => {
-              return (
-                // <tr key={chara.characterId}>
-                //   <td>{chara.characterName}</td>
-                //   <td>{chara.characterAge}</td>
-                //   <td>{chara.characterSetting}</td>
-                // </tr>
-                <MiniChar {...chara} key={"Character-" + chara.characterId}/>
-              );
-            })}
-          {/* </tbody>
+        {ownCharacters.map((chara) => {
+          return (
+            // <tr key={chara.characterId}>
+            //   <td>{chara.characterName}</td>
+            //   <td>{chara.characterAge}</td>
+            //   <td>{chara.characterSetting}</td>
+            // </tr>
+            <MiniChar {...chara} key={"Character-" + chara.characterId} />
+          );
+        })}
+        {/* </tbody>
         </table> */}
       </div>
 
       <br />
       <br />
-
+      <br />
+      <br />
+      <button
+        onClick={deleteProfile}
+        className="logoutButton"
+        style={{ float: "left" }}
+      >
+        DELETE PROFILE
+      </button>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

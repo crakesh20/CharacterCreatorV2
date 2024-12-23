@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { OgChar } from "../interfaces/OgChar";
 import { SyntheticEvent, useState } from "react";
 import axios from "axios";
@@ -8,6 +8,7 @@ function Edit() {
     
     const location = useLocation();
     const character = location.state as OgChar
+    const navigate = useNavigate();
 
     const [characterId, setCharacterId] = useState<number>(character.characterId)
     const [characterName, setCharacterName] = useState<string>(character.characterName)
@@ -28,15 +29,15 @@ function Edit() {
     
     let confirmEdit = () => {
 
-        //       Check to see if the values are properly updating (they are)
-              console.log("Id: " + characterId);
-              console.log("Name: " + characterName);
-              console.log("Age: " + characterAge);
-              console.log("Desc: " + characterDescription);
-              console.log("Setting: " + characterSetting);
-              console.log("Creator: " + characterCreator)
-              console.log("Private? " + characterPrivate);
-              console.log("Mature? " + characterMatureOrNot);
+        // //       Check to see if the values are properly updating (they are)
+        //       console.log("Id: " + characterId);
+        //       console.log("Name: " + characterName);
+        //       console.log("Age: " + characterAge);
+        //       console.log("Desc: " + characterDescription);
+        //       console.log("Setting: " + characterSetting);
+        //       console.log("Creator: " + characterCreator)
+        //       console.log("Private? " + characterPrivate);
+        //       console.log("Mature? " + characterMatureOrNot);
     
             // Check if all required fields are there
               if (!characterName) {
@@ -55,23 +56,25 @@ function Edit() {
     
             axios.put("http://localhost:8080/characters/edit",
                 {
-                    "characterId:": characterId,
+                    "characterId": characterId,
                     "characterName": characterName,
                     "characterAge": characterAge, 
                     "characterSetting": characterSetting, 
                     "description": characterDescription, 
                     "creator": characterCreator,
-                    "isPublic": characterPrivate, 
+                    "public": characterPrivate, 
                     "matureContent": characterMatureOrNot
-                }
-                // ,
-                // {withCredentials: true}
+                },
+                {withCredentials: true}
             ).then((res) => {
                 console.log(res.data)
                 console.log("Character Updated")
             }).catch((err) => {
                 console.log(err)
             })
+
+            alert("Character Updated!")
+            navigate("/profile")
         }
     
     return (
@@ -125,7 +128,7 @@ function Edit() {
         </label>
         <br /> <br />
         <label> 
-            Private? 
+            Make Public: 
             <input 
               id="characterPrivate-input"
               type="checkbox"
@@ -135,7 +138,7 @@ function Edit() {
         </label>
         <br /> <br />
         <label> 
-            18+? 
+            Mature Content: 
             <input
               id="characterMatureOrNot-input"
               type="checkbox"

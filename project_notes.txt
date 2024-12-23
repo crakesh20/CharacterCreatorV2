@@ -2,6 +2,14 @@ Character Customizer
 
 Working on backend? PUT HANDLER AT THE END OF EVERYTHING AND EVERYTHING'S GOING TO BE OK (maybe)
 
+TEST ENVIRONMENT 
+
+User 
+- 
+Admin 
+- 
+
+
 Back End 
 - User 
     - Can add characters 
