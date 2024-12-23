@@ -5,11 +5,15 @@ import axios from "axios";
 import { authContext } from "../../App";
 import MiniChar from "./MiniChar";
 import { useNavigate } from "react-router-dom";
+import { User } from "../interfaces/User";
 
 function Profile() {
   const auth = useContext(authContext);
   const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState<User>();
+  const [matureContentStatus, setMatureContentStatus] = useState<boolean>(true);
   const [ownCharacters, setOwnCharacters] = useState<OgChar[]>([]);
+  const [currentUserId, setCurrentUserId] = useState<number>(0);
 
   let deleteProfile = () => {
     let id = auth?.userId;
@@ -20,19 +24,32 @@ function Profile() {
       })
       .then(() => {
         console.log("Profile Deleted");
-        auth?.setUserId(0)
-        auth?.setUsername("")
-        auth?.setRole("unauthenticated")
-        setOwnCharacters([])
-        alert("Profile Deleted!")
-        navigate("/")
+        auth?.setUserId(0);
+        auth?.setUsername("");
+        auth?.setRole("unauthenticated");
+        setOwnCharacters([]);
+        alert("Profile Deleted!");
+        navigate("/");
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
       });
-
-
   };
+
+  // let toggleMatureContent = () => {
+  //   setMatureContentStatus(!matureContentStatus);
+  //   setCurrentUserId(auth?.userId as unknown as number);
+  //   console.log(currentUserId);
+  //   axios
+  //     .patch(`http://localhost:8080/users/my-profile/hide-mature-content/${currentUserId}`
+  //     )
+  //     .then((res) => {
+  //       setCurrentUser(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     });
+  // };
 
   let getOwnCharacters = (ogc: OgChar[]) => {
     setOwnCharacters(ogc);
@@ -51,6 +68,10 @@ function Profile() {
       });
   }, []);
 
+  useEffect(() => {
+    console.log("MatureContentVisible updated: ", matureContentStatus);
+  }, [matureContentStatus]);
+
   let un = auth?.username;
 
   return (
@@ -66,6 +87,13 @@ function Profile() {
             <h2>Welcome, {un}!</h2>
           </div>
         </div>
+{/* 
+        <button onClick={toggleMatureContent}>Toggle Mature Content</button>
+        <p>
+         Mature Content Visibility:{" "}
+          {matureContentStatus ? "Disabled" : "Enabled"}
+        </p>  */}
+
         {/* <h3>Date of Account Creation:</h3> */}
         {/* <h3>About Me:</h3> */}
         <h3>Characters Made:</h3>

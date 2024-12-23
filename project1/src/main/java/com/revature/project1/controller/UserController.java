@@ -126,13 +126,13 @@ public class UserController {
     }
 
     //Change Mature Content Visibility
-    @PatchMapping("my-profile/hide-mature-content")
-    public ResponseEntity<User> setMatureContentVisibilityHandler(@RequestBody User thisUser) {
+    @PatchMapping("my-profile/hide-mature-content/{userId}")
+    public ResponseEntity<User> setMatureContentVisibilityHandler(@PathVariable int userId) {
         // Checks if the user exists
-        User retrievedUser = userService.getUserByUsername(thisUser.getUsername());
-        if (retrievedUser == null) {
-            return ResponseEntity.badRequest().build();
-        }
+        // if (retrievedUser == null) {
+        //     return ResponseEntity.badRequest().build();
+        // }
+        User retrievedUser = userService.getUserByIdUnique(userId);
         User updatedUser = userService.setMatureContentVisibility(retrievedUser);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }

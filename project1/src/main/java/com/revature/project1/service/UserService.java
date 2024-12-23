@@ -11,69 +11,71 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService
-{
+public class UserService {
     private final UserDAO userDAO;
     private final OgCharDAO ogCharDAO;
 
     @Autowired
-    public UserService(UserDAO userDAO, OgCharDAO ogCharDAO)
-    {
+    public UserService(UserDAO userDAO, OgCharDAO ogCharDAO) {
         this.userDAO = userDAO;
         this.ogCharDAO = ogCharDAO;
     }
 
     //Create a new User
-    public User createNewUser(User newUser){
+    public User createNewUser(User newUser) {
         return userDAO.save(newUser);
     }
 
     //Read Users
     // String param username
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userDAO.findAll();
     }
 
     // Find User by Username
-    public User getUserByUsername(String username) { return userDAO.getUserByUsername(username); }
+    public User getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
+    }
 
     //Update a user's Username
-    public User updateUsername(User updatedUser){
+    public User updateUsername(User updatedUser) {
         Optional<User> thisUser = userDAO.findById(updatedUser.getUserId());
         if (thisUser.isPresent()) {
             thisUser.get().setUsername(updatedUser.getUsername());
             return userDAO.save(thisUser.get());
-        }
-        else
+        } else
             return null;
     }
+
     //Update a user's password
-    public User updatePassword(User updatedUser){
+    public User updatePassword(User updatedUser) {
         Optional<User> thisUser = userDAO.findById(updatedUser.getUserId());
         if (thisUser.isPresent()) {
             thisUser.get().setPassword(updatedUser.getPassword());
             return userDAO.save(thisUser.get());
-        }
-        else
+        } else
             return null;
     }
 
     //Update a user's mature content visibility
-    public User setMatureContentVisibility(User updatedUser){
+    public User setMatureContentVisibility(User updatedUser) {
         Optional<User> thisUser = userDAO.findById(updatedUser.getUserId());
         if (thisUser.isPresent()) {
+//            User user = thisUser.get();
+//            user.setMatureContentVisible(updatedUser.isMatureContentVisible());
+//            return userDAO.save(thisUser.get());
             User user = thisUser.get();
-            user.setMatureContentVisible(updatedUser.isMatureContentVisible());
-            return userDAO.save(thisUser.get());
-        }
-        else {
+            boolean mcv = user.isMatureContentVisible();
+            user.setMatureContentVisible(!mcv);
+            return userDAO.save(user);
+        } else {
             return null;
-        }    
+        }
     }
 
     // TODO: add a check to ensure only an admin can ban users
     //Ban or Unban a User
-    public User moderateUser(int userId){
+    public User moderateUser(int userId) {
         Optional<User> thisUser = userDAO.findById(userId);
         // if(thisUser.isPresent()) {
         //     thisUser.get().setBanned(updatedUser.isBanned());
@@ -93,7 +95,7 @@ public class UserService
     //Delete a User
     // TODO: Only an admin should be able to delete users that are not themselves
     //      A user should be able to delete their own account and No One Else's
-    public void removeUser(int userId){
+    public void removeUser(int userId) {
         Optional<User> retrievedUser = userDAO.findById(userId);
         if (retrievedUser.isPresent()) {
             User user = retrievedUser.get();
@@ -138,6 +140,11 @@ public class UserService
             return potentialUser.get();
         }
         return null;
+    }
+
+    public User getUserByIdUnique(int id) {
+        Optional<User> user = userDAO.findById(id);
+        return user.get();
     }
 
     public List<OgChar> getCharactersById(int userId, String username) {
