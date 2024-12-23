@@ -4,13 +4,10 @@ import com.revature.project1.Exceptions.ContentNotFoundException;
 import com.revature.project1.dao.OgCharDAO;
 import com.revature.project1.dao.UserDAO;
 import com.revature.project1.model.OgChar;
-import com.revature.project1.model.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class OgCharService {
@@ -58,18 +55,18 @@ public class OgCharService {
 
     //Delete a Character.
     // : Make it so that only the character's creator can delete a character
-    public void deleteCharacter(int characterId, String username) {
+    public void deleteCharacter(int characterId) {
         // Get the character and the user trying to delete it
-        User retrievedUser = userDAO.getUserByUsername(username);
-        Optional<OgChar> retrievedCharacter = ogCharDAO.findById(characterId);
+//        User retrievedUser = userDAO.getUserByUsername(username);
+        //Optional<OgChar> retrievedCharacter = ogCharDAO.findById(characterId);
         // Check if the character exists
-        if (retrievedCharacter.isPresent()) {
-            OgChar character = retrievedCharacter.get();
+       // if (retrievedCharacter.isPresent()) {
+            //OgChar character = retrievedCharacter.get();
             // If the user's id is the same as the character's creator id, then delete it
-            if (retrievedUser.getUserId() == character.getCreator()) {
+            //if (retrievedUser.getUserId() == character.getCreator()) {
                 ogCharDAO.deleteById(characterId);
-            }
-        }
+            //}
+        //}
     }
 
 //    public List<User> getSpecificCharactersPublic(String input) {
