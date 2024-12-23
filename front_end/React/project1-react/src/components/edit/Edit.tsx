@@ -9,10 +9,12 @@ function Edit() {
     const location = useLocation();
     const character = location.state as OgChar
 
+    const [characterId, setCharacterId] = useState<number>(character.characterId)
     const [characterName, setCharacterName] = useState<string>(character.characterName)
     const [characterAge, setCharacterAge] = useState<number>(character.characterAge)
     const [characterDescription, setCharacterDescription] = useState<string>(character.description)
     const [characterSetting, setCharacterSetting] = useState<string>(character.characterSetting)
+    const [characterCreator, setCreator] = useState<number>(character.creator)
     const [characterPrivate, setCharacterPrivate] = useState<boolean>(character.isPublic)
     const [characterMatureOrNot, setCharacterMatureOrNot] = useState<boolean>(character.matureContent)
     
@@ -24,15 +26,17 @@ function Edit() {
         setCharacterMatureOrNot(!characterMatureOrNot)
     }
     
-    let checking = () => {
+    let confirmEdit = () => {
 
         //       Check to see if the values are properly updating (they are)
-            //   console.log("Name: " + characterName);
-            //   console.log("Age: " + characterAge);
-            //   console.log("Desc: " + characterDescription);
-            //   console.log("Setting: " + characterSetting);
-            //   console.log("Private? " + characterPrivate);
-            //   console.log("Mature? " + characterMatureOrNot);
+              console.log("Id: " + characterId);
+              console.log("Name: " + characterName);
+              console.log("Age: " + characterAge);
+              console.log("Desc: " + characterDescription);
+              console.log("Setting: " + characterSetting);
+              console.log("Creator: " + characterCreator)
+              console.log("Private? " + characterPrivate);
+              console.log("Mature? " + characterMatureOrNot);
     
             // Check if all required fields are there
               if (!characterName) {
@@ -49,19 +53,22 @@ function Edit() {
                   return
               }
     
-            axios.post("http://localhost:8080/characters/create",
+            axios.put("http://localhost:8080/characters/edit",
                 {
+                    "characterId:": characterId,
                     "characterName": characterName,
                     "characterAge": characterAge, 
                     "characterSetting": characterSetting, 
                     "description": characterDescription, 
-                    "public": characterPrivate, 
+                    "creator": characterCreator,
+                    "isPublic": characterPrivate, 
                     "matureContent": characterMatureOrNot
-                },
-                {withCredentials: true}
+                }
+                // ,
+                // {withCredentials: true}
             ).then((res) => {
                 console.log(res.data)
-                console.log("Character created")
+                console.log("Character Updated")
             }).catch((err) => {
                 console.log(err)
             })
@@ -137,7 +144,7 @@ function Edit() {
             />
         </label>
         <br /> <br />
-        <button onClick={checking} id="createChar">Confirm Changes</button>
+        <button onClick={confirmEdit} id="createChar">Confirm Changes</button>
         </div>
     </main>
     )
