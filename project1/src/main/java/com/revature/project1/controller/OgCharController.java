@@ -53,9 +53,9 @@ public class OgCharController
     }
 
     //DELETE
-    @DeleteMapping("{characterId}")
-    public void deleteCharacterHandler(HttpSession session, @PathVariable int characterId){
-        String username = (String)session.getAttribute("username");
-        ogCharService.deleteCharacter(characterId, username);
+    @DeleteMapping("{characterId}") //HttpSession session
+    public void deleteCharacterHandler(@PathVariable int characterId){
+        //String username = (String)session.getAttribute("username");
+        ogCharService.deleteCharacter(characterId);
     }
 }
