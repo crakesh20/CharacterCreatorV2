@@ -43,7 +43,7 @@ public class OgCharController
     }
 
     //UPDATE
-    @PatchMapping
+    @PutMapping("edit")
     public ResponseEntity<OgChar> updateCharacterHandler(@RequestBody OgChar updatedChar){
         OgChar updatedOgChar = ogCharService.updateCharacter(updatedChar);
         if (updatedOgChar == null) {
