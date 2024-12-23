@@ -10,11 +10,11 @@ function Create() {
     const [characterAge, setCharacterAge] = useState<number>(0)
     const [characterDescription, setCharacterDescription] = useState<string>('')
     const [characterSetting, setCharacterSetting] = useState<string>('')
-    const [characterPrivate, setCharacterPrivate] = useState<boolean>(false)
+    const [characterPublic, setCharacterPublic] = useState<boolean>(false)
     const [characterMatureOrNot, setCharacterMatureOrNot] = useState<boolean>(false)
 
-    let checkChangePrivate = () => {
-        setCharacterPrivate(!characterPrivate)
+    let checkChangePublic = () => {
+        setCharacterPublic(!characterPublic)
     }
 
     let checkChangeMatureOrNot = () => {
@@ -52,7 +52,7 @@ function Create() {
                 "characterAge": characterAge, 
                 "characterSetting": characterSetting, 
                 "description": characterDescription, 
-                "public": characterPrivate, 
+                "public": characterPublic, 
                 "matureContent": characterMatureOrNot
             },
             {withCredentials: true}
@@ -116,17 +116,17 @@ function Create() {
         </label>
         <br /> <br />
         <label> 
-            Private? 
+            Make Public: 
             <input 
               id="characterPrivate-input"
               type="checkbox"
-              value={characterPrivate}
-              onChange={ checkChangePrivate }
+              value={characterPublic}
+              onChange={ checkChangePublic }
             />
         </label>
         <br /> <br />
         <label> 
-            18+? 
+            Mature Content:  
             <input
               id="characterMatureOrNot-input"
               type="checkbox"
