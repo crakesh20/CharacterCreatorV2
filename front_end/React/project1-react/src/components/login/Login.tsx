@@ -66,8 +66,8 @@ function Login() {
         </label>
         <br/> <br/>
         {/* TODO: Check username and password in database using a function before redirection */}
-        <Link to="/home"><button id="logInUserButton" onClick={login}>Log In</button></Link>
-        <Link to="/home"><button id="registerNewUser" onClick={register}>New User</button></Link>
+        <Link to="/profile"><button id="logInUserButton" onClick={login}>Log In</button></Link>
+        <Link to="/"><button id="registerNewUser" onClick={register}>New User</button></Link>
       </div>
     </>
   );
