@@ -25,6 +25,7 @@ function Character() {
         <br /> 
         <h2>Description:</h2>
         <span>{character.description}</span>
+        <br /> <br />
       </div>
     </main>
   );
