@@ -12,6 +12,27 @@ hr {
     margin-left: 20px;
 }
 
-/* .checkboxes {
+.results {
+    width: 75%;
+    border-collapse: collapse; 
+    /* margin: 20px 0;  */
+    font-size: 20px; 
+    text-align: center; 
+    margin: auto;
+}
 
-} */
+.results th {
+    background-color: wheat;
+    color: black; 
+    font-weight: bold; 
+    padding: 10px; 
+    border: 2px solid darkslategrey;
+    width: 25%;
+}
+
+.results td {
+    padding: 10px; 
+    border: 2px solid darkslategrey; 
+    background-color: wheat;
+    color: black;
+}
